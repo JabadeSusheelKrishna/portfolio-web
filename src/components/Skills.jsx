@@ -67,11 +67,10 @@ export default function Skills() {
                     <div className="flex flex-wrap gap-1.5">
                         <button
                             onClick={() => setActiveTab('all')}
-                            className={`px-3 py-1 rounded-lg border text-xs font-mono font-medium transition-all ${
-                                activeTab === 'all'
-                                    ? 'bg-[#D48C45] text-black border-transparent font-bold'
-                                    : 'bg-[#0C0E0C] text-[#C4BFAF] border-[#2C302C] hover:border-gray-500'
-                            }`}
+                            className={`px-3 py-1 rounded-lg border text-xs font-mono font-medium transition-all ${activeTab === 'all'
+                                ? 'bg-[#D48C45] text-black border-transparent font-bold'
+                                : 'bg-[#0C0E0C] text-[#C4BFAF] border-[#2C302C] hover:border-gray-500'
+                                }`}
                         >
                             [all]
                         </button>
@@ -79,11 +78,10 @@ export default function Skills() {
                             <button
                                 key={cat.id}
                                 onClick={() => setActiveTab(cat.id)}
-                                className={`px-3 py-1 rounded-lg border text-xs font-mono font-medium transition-all ${
-                                    activeTab === cat.id
-                                        ? 'bg-[#D48C45] text-black border-transparent font-bold'
-                                        : 'bg-[#0C0E0C] text-[#C4BFAF] border-[#2C302C] hover:border-gray-500'
-                                }`}
+                                className={`px-3 py-1 rounded-lg border text-xs font-mono font-medium transition-all ${activeTab === cat.id
+                                    ? 'bg-[#D48C45] text-black border-transparent font-bold'
+                                    : 'bg-[#0C0E0C] text-[#C4BFAF] border-[#2C302C] hover:border-gray-500'
+                                    }`}
                             >
                                 [{cat.id}]
                             </button>
@@ -92,27 +90,34 @@ export default function Skills() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-                    {filteredCategories.map((cat, idx) => (
-                        <div
-                            key={cat.id}
-                            className={`bg-[#0C0E0C] border border-[#2C302C] p-5 rounded-xl transition-all flex flex-col justify-between ${cat.colorClass}`}
-                        >
-                            <div>
-                                <div className="w-8 h-8 rounded-lg bg-current/10 flex items-center justify-center mb-4">
-                                    {cat.icon}
+                    {filteredCategories.map((cat, idx) => {
+                        const isPrimary = cat.id === 'languages' || cat.id === 'ai' || cat.id === 'web';
+                        const iconWrapperColorClass = isPrimary 
+                            ? 'text-[#D48C45] bg-[#D48C45]/10' 
+                            : 'text-[#E07A5F] bg-[#E07A5F]/10';
+
+                        return (
+                            <div
+                                key={cat.id}
+                                className={`bg-[#0C0E0C] border border-[#2C302C] p-5 rounded-xl transition-all flex flex-col justify-between ${cat.colorClass}`}
+                            >
+                                <div>
+                                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center mb-4 ${iconWrapperColorClass}`}>
+                                        {cat.icon}
+                                    </div>
+                                    <h3 className="font-bold text-[#EBE6DD] text-xs tracking-wide mb-1.5 font-mono">{cat.title}</h3>
+                                    <p className="text-[10px] text-gray-400 mb-4 leading-relaxed font-sans">{cat.desc}</p>
+                                    <ul className="space-y-1.5">
+                                        {cat.skills.map((skill, i) => (
+                                            <li key={i} className="flex items-center gap-2 text-xs text-[#C4BFAF] font-sans">
+                                                <span className={`w-1 h-1 rounded-full ${cat.bulletColor}`} /> {skill}
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
-                                <h3 className="font-bold text-[#EBE6DD] text-xs tracking-wide mb-1.5 font-mono">{cat.title}</h3>
-                                <p className="text-[10px] text-gray-400 mb-4 leading-relaxed font-sans">{cat.desc}</p>
-                                <ul className="space-y-1.5">
-                                    {cat.skills.map((skill, i) => (
-                                        <li key={i} className="flex items-center gap-2 text-xs text-[#C4BFAF] font-sans">
-                                            <span className={`w-1 h-1 rounded-full ${cat.bulletColor}`} /> {skill}
-                                        </li>
-                                    ))}
-                                </ul>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </section>
