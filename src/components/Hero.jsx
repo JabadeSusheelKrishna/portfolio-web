@@ -25,7 +25,7 @@ export default function Hero() {
                     </div>
 
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#EBE6DD] mb-6 leading-[1.15]">
-                        Developing <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D48C45] to-[#E07A5F]">Scalable Architectures</span> and ML Models.
+                        Developing <span className="text-orange-400 bg-clip-text bg-gradient-to-r from-[#D48C45] to-[#E07A5F]">Scalable Architectures</span> and ML Models.
                     </h1>
 
                     <p className="text-[#C4BFAF] text-sm md:text-base leading-relaxed max-w-xl mb-8 font-sans">
@@ -65,7 +65,7 @@ export default function Hero() {
                                 className="w-full h-full object-cover filter brightness-95"
                             />
                         ) : (
-                            <div className="w-full h-full flex flex-col items-center justify-center p-2 text-center text-[#EBE6DD] relative">
+                            <div className="w-full h-full flex flex-col items-center justify-center p-1 text-center text-[#EBE6DD] relative">
                                 {/* <User size={40} className="text-[#D48C45] mb-2 opacity-80" />
                                 <p className="font-mono text-[11px] text-[#A29E93]">Drop your profile picture here to preview!</p>
                                 <label className="mt-4 px-3 py-1.5 bg-[#D48C45] hover:bg-[#b07335] text-black font-sans text-xs font-bold rounded-lg transition-all cursor-pointer">
