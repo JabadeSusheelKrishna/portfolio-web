@@ -28,8 +28,8 @@ export default function App() {
             {/* --- TECHNICAL CAPABILITIES STACK --- */}
             <Skills />
 
-            {/* --- FORMAL SYSTEM ARCHITECTURE SHOWCASE --- */}
-            <Architectures />
+            {/* --- FORMAL SYSTEM ARCHITECTURE SHOWCASE ---
+            <Architectures /> */}
 
             {/* --- PROFESSIONAL EXPERIENCE TIMELINE --- */}
             <Experience />

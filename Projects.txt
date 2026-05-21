@@ -1,0 +1,403 @@
+
+## 📝 Project Summary: Tamil Nadu Temple Detection AI
+
+### 🏛️ Project Overview
+
+* 
+**Goal**: Developed an AI-driven, end-to-end computer vision solution to accurately identify and classify **15 historically significant temples** from Tamil Nadu using user-uploaded images.
+
+
+* 
+**Purpose**: Acts as a virtual guide for tourists and historians by instantly retrieving historical data, visiting hours, and Google Maps navigation upon classification.
+
+
+* 
+**Tech Stack**: Built using **Python, PyTorch, Transformers (Hugging Face), Docker, and Streamlit**.
+
+
+
+---
+
+### 🔬 Methodology & Iterative Approaches
+
+To find the best accuracy, the project systematically tested **5 different prediction methodologies**:
+
+* 
+**V1 (Baseline Zero-Shot)**: Passed raw temple names directly to OpenAI's CLIP vision-language model, serving as the benchmark.
+
+
+* 
+**V2 (Prompt Engineering)**: Enriched text prompts semantically (e.g., *"A majestic photo of the [Temple Name]..."*) to improve visual-conceptual alignment.
+
+
+* 
+**V3 (Region of Interest)**: Automatically cropped the central **70%** of images to eliminate background noise like clouds and crowds.
+
+
+* 
+**V4 (Image Enhancement)**: Applied an OpenCV sharpening filter to make intricate architectural carvings more prominent for the model encoder.
+
+
+* 
+**V5 (Hybrid FFNN Head)**: Froze the CLIP image encoder and trained a custom, lightweight Multi-Layer Perceptron (MLP) head with ReLU activation and Dropout regularization.
+
+
+
+---
+
+### 📊 Key Performance Metrics & Results
+
+The approaches were rigorously evaluated on a custom dataset, leading to a massive breakthrough with the hybrid architecture:
+
+| Method Version | Methodology Description | Classification Accuracy | Average Confidence Score |
+| --- | --- | --- | --- |
+| **V1** | Baseline Zero-Shot 
+
+ | <br>**21.78%** 
+
+ | 32.65% 
+
+ |
+| **V2** | Prompt Engineering 
+
+ | <br>**19.80%** 
+
+ | 33.39% 
+
+ |
+| **V3** | Region of Interest (ROI) Focus 
+
+ | <br>**11.88%** 
+
+ | 30.16% 
+
+ |
+| **V4** | Image Enhancement 
+
+ | <br>**21.78%** 
+
+ | 29.90% 
+
+ |
+| **V5 (Best)** | <br>**Hybrid FFNN Approach** 
+
+ | 🚀 **85.15%** 
+
+ | 🚀 **62.67%** 
+
+ |
+
+> 
+> **Key Takeaway for Resume:** The custom Hybrid FFNN model (**V5**) yielded a stellar **~63.37% absolute increase in accuracy** over the initial baseline zero-shot model (**V1**), proving the power of training domain-specific classification heads.
+> 
+> 
+
+---
+
+### 🌟 Future Scope & Enhancements
+
+* 
+**RAG Integration**: Plan to add a **Retrieval-Augmented Generation (RAG)** chatbot to answer dynamic, complex historical queries about the temples.
+
+
+* 
+**Edge Optimization**: Transition to lighter foundation models like **MobileCLIP** to drastically lower inference latency for mobile devices.
+
+
+
+---
+---
+
+
+
+---
+
+## 📝 Project Summary: Distributed Messaging Queue using RabbitMQ
+
+### 🏗️ Project Architecture & Overview
+
+* **Goal**: Engineered a highly available, fault-tolerant distributed task processing system capable of handling asynchronous, high-concurrency workloads.
+* **System Design**: Designed a 4-tier architecture comprising a Client CLI, an Application Layer with multiple Producer nodes, a Messaging Layer, and a Worker Layer.
+* **Tech Stack**: Built entirely using **Go (Golang), RabbitMQ (Quorum Queues), gRPC (HTTP/2), Protocol Buffers, AMQP 0-9-1, Docker, and Docker Compose**.
+
+---
+
+### 🧩 Core Component Implementation
+
+* **Client-Side Load Balancing**: Implemented an external client CLI that randomly distributes incoming tasks across available producer nodes via high-performance **gRPC** connections.
+* **Intelligent Routing Gateway**: Developed Producer nodes that act as gateways, converting incoming gRPC requests into **AMQP 0-9-1** messages and executing custom routing logic (Direct routing for individual queues and Fan-out routing for simultaneous multi-queue task processing).
+* **High Availability Broker Cluster**: Deployed a **4-node RabbitMQ Cluster** utilizing shared Erlang Cookies for node authentication and auto-discovery. Enabled data resilience by utilizing **Raft-consensus-based Quorum Queues**, message persistence, and durable queues to eliminate single points of failure.
+* **Reliable Worker Pool**: Built Consumer workers utilizing **Manual Acknowledgments** to prevent data loss in the event of unexpected runtime crashes. Configured Quality of Service (**QoS Prefetch = 1**) to dynamically load-balance tasks and prevent consumer overloading.
+
+---
+
+### 📊 Simulation Performance & Key Metrics
+
+Evaluated system limits under a high-concurrency load generation test to analyze throughput and uncover operational bottlenecks:
+
+* **High-Volume Burst Test**: Submitted a heavy burst of **60 tasks within a 6-second window** (sustained rate of **10 tasks/second**) across Direct, Fanout, Topic, and Header exchanges.
+* **100% Reliability Rate**: Successfully processed and completed **60 out of 60 tasks**, maintaining a perfect **100% routing accuracy** and zero message loss under intense load.
+* **System Throughput**: Maintained a processing throughput of **7.70 tasks/second** across the cluster.
+* **Bottleneck Identification**: Logged an average processing time of **1.95s** per task, resulting in an average queue latency of **33.60s** and a P95 latency of **64.00s**. Identified that a 2-consumer pool creates a sequential processing bottleneck during micro-bursts, concluding that adding more worker instances will scale down wait times linearly.
+
+---
+
+### 🌟 Future Enhancements & Production Roadmap
+
+* **Full-Stack Observability**: Integrating **Prometheus metrics**, **Grafana dashboards**, and **OpenTelemetry** for end-to-end distributed tracing.
+* **Advanced Error Handling**: Implementing **Dead Letter Queues (DLQ)** alongside exponential backoff retry policies to capture and manage failed tasks.
+
+---
+---
+
+## 📝 Project Summary: Provably Secure End-to-End Cryptographic & MPC Stack
+
+### 🛠️ Core Engineering Blueprint & Design Constraints
+
+* 
+**The No-Library Constraint**: Engineered a massive, production-grade cryptographic dependency chain completely from scratch using **Python and React**. Substitutions of standard cryptographic libraries (e.g., OpenSSL, PyCryptodome) were forbidden.
+
+
+* 
+**Strict Lineage Rule**: Implemented low-level operations dynamically so that high-level applications logically trigger custom underlying primitives down to arbitrary-precision arithmetic and OS randomness.
+
+
+* 
+**Interactive React Explorer Component**: Developed an incremental React/Vite-based web application calling core backend functions compiled to WebAssembly/Local APIs. Features live data-flow rendering, a step-through DAG routing table, and an empirical security distinguishing game emulator.
+
+
+
+---
+
+### 🧩 Core Mathematical Modules & Security Implementations
+
+#### 📦 Phase 1: Symmetric Cryptography & The Minicrypt Clique (PA #1 – #6)
+
+* 
+**Foundation Bootstrap**: Built a length-doubling Pseudorandom Generator (PRG) via iterative Goldreich-Levin hard-core bit extraction over a custom Discrete Logarithm Problem (DLP) group.
+
+
+* 
+**Functional Primitives**: Constructed a deep binary **GGM Tree Pseudorandom Function (PRF)** mapping arbitrary bit sequences, verified via NIST SP 800-22 statistical test suites.
+
+
+* 
+**Cipher Block Operations**: Formulated a uniform API handling multi-block data streams via **CBC, OFB, and randomized Counter (CTR) modes** alongside custom PKCS padding layouts.
+
+
+* 
+**Malleability Hardening**: Designed variable-length fixed-tag MAC systems to scale up a malleable CPA-secure cipher into an indistinguishable, **CCA2-secure Active-Defense Encrypt-then-MAC engine**.
+
+
+
+#### 🔑 Phase 2: Hashing, Data Integrity, & Public Key Cryptography (PA #7 – #17)
+
+* 
+**Resilient Hash Framework**: Created a generic **Merkle-Damgård Transform** engine featuring custom block-strengthening pads. Proved security metrics by deploying Floyd's Tortoise-and-Hare cycle detection to run automated **Birthday Boundary Attacks**.
+
+
+* 
+**HMAC Double-Hash Structure**: Built a complete secure **HMAC** system over custom DLP-based compression blocks , preventing classic length-extension state forgery.
+
+
+* 
+**Asymmetric Infrastructure**: Coded a custom **Miller-Rabin Probabilistic Primality Tester** ($k=40$ rounds, error $\le 4^{-40}$) to generate 1024/2048-bit safe primes ($p=2q+1$).
+
+
+* 
+**Cryptomania Cryptosystems**: Created textbook **RSA** and modular **ElGamal PKC engines**. Optimized honest-party operations using **Garner's CRT Recombination algorithm** for a **3–4x decryption speedup**. Implemented adaptive padding rules to neutralize **Håstad's Broadcast and Bleichenbacher oracle attacks**.
+
+
+
+#### 🤝 Phase 3: Secure Multi-Party Computation / MPC Land (PA #18 – #20)
+
+* 
+**Oblivious Transfer Core**: Engineered an atomic **1-out-of-2 Bellare-Micali Oblivious Transfer protocol** leveraging trapdoor elimination to guarantee perfect computational receiver privacy.
+
+
+* 
+**Complete Gate Synthesis**: Developed zero-communication **Secure XOR** and **NOT** layers via local additive secret sharing over $\mathbb{Z}_2$, alongside a protocol-driven **Secure AND Gate** subroutine.
+
+
+* 
+**Yao's Functional Completeness Execution**: Rolled out an MPC compiler that represents arbitrary 2-party polynomial functions as directed acyclic graphs (DAGs). Successfully evaluated the **Millionaire’s Problem (unbounded $x > y$)**, bit-wise equality arrays, and modular ripple-carry additions with a zero-knowledge, fully simulatable transaction transcript.
+
+
+
+---
+
+### 🚀 Key Recruiter Metrics for Your Resume
+
+* 
+**0% External Cryptographic Dependencies**: Engineered the entire pipeline from raw mathematical formulas up to multi-party applications.
+
+
+* 
+**4x Performance Multiplier**: Accelerated raw asymmetric decryption throughput by using Chinese Remainder Theorem matrix routing.
+
+
+* 
+**Perfect Multi-Party Secrecy**: Logged verification transcripts showing **0% data leakage** beyond the specified circuit boundaries across hundreds of iterative simulation rounds.
+
+
+
+---
+---
+
+## 📝 Project Summary: HealthMate AI
+
+### 🏥 Project Overview & Core Mission
+
+* **Goal**: Engineered **HealthMate AI**, a privacy-preserving, intelligent health assistant designed to act as a reliable first point of reference for health-related queries.
+* **Core Competency**: Leveraged advanced Large Language Models (LLMs) alongside specialized internal predictive models to parse natural language queries about symptoms, diseases, and medical precautions.
+* **Architecture**: Implemented a scalable, microservices-like architecture cleanly decoupling the frontend, backend, and cloud database layers.
+
+---
+
+### 🧱 Full-Stack Component Implementation
+
+* **PWA Frontend Layer**: Built a mobile-first, responsive real-time chat dashboard using **React 18, Vite, and Tailwind CSS**. Integrated `vite-plugin-pwa` to enable offline local caching capabilities and installable progressive web app functionality.
+* **Intelligent AI Backend Engine**: Developed a robust **Flask (Python)** server deployed via **Docker containers on Google Cloud Run**. Deployed a **Retrieval-Augmented Generation (RAG)** inspired controller pattern using the Google Gemini LLM API:
+* **Intent Recognition**: Utilized the LLM to classify user intents dynamically.
+* **Model Routing**: Routed classified requests to specific downstream analytical sub-models including `SymptomToDisease`, `DiseaseToPrecaution`, and `DiseaseToSymptom`.
+* **Empathetic Synthesis**: Re-routed raw model output data back through the LLM to generate clear, human-readable, and empathetic natural language responses.
+
+
+* **Secure Database Layer**: Configured a **MongoDB Atlas** cloud NoSQL instance to manage persistent chat histories, securely verify user authentication data via **JWT and Bcrypt**, and index underlying disease-symptom datasets for fast search retrieval.
+
+---
+
+### 📐 Software Engineering Design Patterns
+
+* **Controller-Service Pattern**: Structured Flask routes to act strictly as controllers, delegating complex data operations to modular model classes.
+* **Factory Pattern**: Implemented an efficient factory engine to handle the lazy-loading and runtime initialization of heavy machine learning modules.
+* **Decorator Pattern**: Authored a reusable `@token_required` authentication middleware wrapper to universally enforce access control across sensitive API endpoints.
+
+---
+
+### 🌟 Future Enhancements & Production Roadmap
+
+* **Multimodal Accessibility**: Integrating voice-to-text features alongside multi-language localization to remove structural global accessibility barriers.
+* **Telehealth Ecosystem**: Proposing an optional "Doctor Connect" telemetry module to allow direct sharing of AI-generated diagnostic reports with certified health professionals.
+
+---
+
+### 🚀 Key Recruiter Metrics for Your Resume
+
+* **100% Core Software Design Alignment**: Successfully integrated classic engineering patterns (**Factory, Controller-Service, and Decorators**) to keep code production-ready.
+* **Zero Leaked Records**: Adhered strictly to a privacy-first layout using secure tokenized authentication routes and private cloud instances.
+
+---
+
+
+
+
+
+---
+
+
+
+## 📝 Project Summary: Greddit (Social Media & Community Platform)
+
+### 🌐 Project Overview & Core Mission
+
+* **Goal**: Engineered **Greddit**, a comprehensive, full-stack social networking solution built to facilitate community-driven content sharing and engagement.
+* **Design Philosophy**: Inspired by the architectural pillars of Reddit, providing a scalable environment for users to create, categorize, and interact with diverse media content.
+* **Architecture**: Implemented a fully decoupled client-server, single-page application (SPA) architecture, optimizing separation of concerns and system maintainability.
+
+---
+
+### 🎨 Frontend Ecosystem & User Interface
+
+* **Core Framework**: Developed a responsive frontend using **React.js** configured with functional components and modern hooks.
+* **Routing & Client Operations**: Configured **React Router v7** for seamless navigation and **Axios** featuring custom HTTP interceptors to manage streamlined API requests.
+* **State & Styling**: Leveraged the React Context API to maintain global auth persistence and built a responsive styling system optimized for dark mode using vanilla CSS tokens.
+
+---
+
+### ⚙️ Backend Engineering & Data Modeling
+
+* **Runtime Framework**: Built a RESTful API server running on **Node.js** and **Express.js** to manage entity logic and handle application routing requests.
+* **Database & ODM**: Deployed a scalable **MongoDB** NoSQL database layer, utilizing **Mongoose ODM** schemas for structural data validation and modeling.
+
+---
+
+### ✨ Core Features & Platform Functionality
+
+* **User Capabilities**:
+* **Social Graph & Feeds**: Engineered an interactive follow/unfollow system allowing users to curate a personalized content feed.
+* **Content Lifecycle**: Enabled full lifecycle interaction support for media posts (Create, Read, Like, Comment) supporting rich text and media URLs.
+* **Categorization**: Programmed a multidimensional tagging system allowing data filtering by niche interest communities called **Subgreddits**.
+* **Discovery Engine**: Implemented an optimized search engine spanning profiles, posts, and niche communities.
+
+
+* **Administrative Control & Moderation**: Integrated a dedicated admin portal featuring real-time content auditing tools to identify, evaluate, and purge non-compliant content.
+
+---
+
+### 🔐 Security & Resource Protection
+
+* **Stateless Sessions**: Prevented session hijacking vectors by implementing stateless authentication via **JSON Web Tokens (JWT)**.
+* **Cryptographic Hashing**: Safeguarded credentials using one-way cryptographic hashing via **Bcrypt.js** with individual salting protocols.
+* **Access Control**: Deployed middleware-level authorization checks to act as guards on sensitive API endpoints, paired with strict Cross-Origin Resource Sharing (CORS) handling.
+
+---
+
+### 🚀 Key Recruiter Metrics for Your Resume
+
+* **100% Production-Ready Security**: Combined **JWT stateless sessions**, **Bcrypt.js** salting, and **CORS filters** to completely secure user data from hijacking vectors.
+* **Decoupled Architecture Efficiency**: Achieved a clean separation of concerns by deploying an isolated **Express API backend** serving an independent **React SPA frontend**.
+
+---
+
+---
+
+
+---
+
+## 📝 Project Summary: Agent-Based Simulation of Commuter EVs
+
+### 🌐 Project Overview & Core Architecture
+
+* **Goal**: Engineered an agent-based simulation system to model and analyze the daily movement, routing, and charging behavior of commuter electric vehicles (EVs) across a synthetic city network.
+* **System Design**: Designed an interactive environment where discrete vehicle agents dynamically navigate a road network connecting residential (home), commercial (office), retail (shops), and hospitality (restaurants) nodes.
+* **Data Pipelines**: Built a discrete-time simulator running on 1-minute intervals that concurrently updates, captures, and logs the real-time operational state of all vehicle agents and infrastructure components.
+
+---
+
+### ⚙️ Core Technical Implementations & Features
+
+* **Intelligent Routing & Infrastructure Allocation**:
+* Implemented and benchmarked **three distinct allocation algorithms** to dynamically route vehicles with low battery parameters to optimal charging infrastructure.
+* **Nearest Station Allocation**: Leveraged **Dijkstra’s algorithm** to compute the absolute shortest path to the geographically closest available charging hub.
+* **Least Queue Allocation**: Routed agents to hubs with the smallest active waiting queue to systematically minimize vehicle wait times.
+* **Random Station Allocation**: Handled baseline stochastic load-balancing by distributing agents randomly across open queues.
+
+
+* **Dynamic Physics & Consumption Model**:
+* Modeled the city transit infrastructure as a topological graph of nodes and edges.
+* Programmed vehicles to read edge-level speed limits dynamically, adjusting their instant velocity, step-wise distance covered, and battery discharge curves accordingly.
+
+
+* **Stochastic Behavioral Scheduling Engine**:
+* Assigned each agent a unique weekly transit profile mapping specific shopping and dining destinations.
+* Modeled finite-state machine transitions (e.g., *Moving to Shop, At Location*) executed by a temporal scheduler handling randomized, agent-consistent visit constraints across a 7-day calendar matrix.
+
+
+
+---
+
+### 📊 Simulation Processing & Output Telemetry
+
+* **Ingestion and Setup**: Initialized simulation space by parsing spatial city layouts and infrastructure positions directly from input **GeoJSON files**.
+* **Granular State Logging**: Captured micro-level data points every minute—including exact coordinates, instant speed values, remaining battery percentages, grid queue lengths, and active power draw counts.
+* **Comparative Analytics Data Store**: Exported granular execution outputs into distinct, structurally indexed **JSON files** mapped to each allocation method, generating a clean data source for visual optimization analysis.
+
+---
+
+### 🚀 Key Recruiter Metrics for Your Resume
+
+* **Multi-Algorithmic Testing Framework**: Successfully built and automated the isolated execution of **3 structural optimization policies** to analyze queue delays and route bottlenecks.
+* **High-Fidelity Telemetry Logging**: Developed a 1-minute interval data-logging engine recording vehicle parameters and power grid statuses to a structured JSON database.
+
+---

@@ -25,11 +25,11 @@ export default function Hero() {
                     </div>
 
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#EBE6DD] mb-6 leading-[1.15]">
-                        Developing high-speed <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D48C45] to-[#E07A5F]">backend architectures</span> and custom databases.
+                        Developing <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D48C45] to-[#E07A5F]">Scalable Architectures</span> and ML Models.
                     </h1>
 
                     <p className="text-[#C4BFAF] text-sm md:text-base leading-relaxed max-w-xl mb-8 font-sans">
-                        Computer Science Senior at <strong>IIIT Hyderabad</strong>. Specialized in optimizing low-latency distributed networks, designing reliable multi-agent workflows, and constructing robust memory management pipelines.
+                        Computer Science Graduate from <strong>IIIT Hyderabad</strong>. Experienced in optimizing low-latency distributed networks, designing reliable multi-agent workflows, and constructing robust memory management pipelines.
                     </p>
                 </div>
 
@@ -39,7 +39,7 @@ export default function Hero() {
                         <div className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">CGPA @ IIITH</div>
                     </div>
                     <div>
-                        <div className="text-xl font-bold text-[#E07A5F]">5+</div>
+                        <div className="text-xl font-bold text-[#E07A5F]">10+</div>
                         <div className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">Systems Projects</div>
                     </div>
                     <div>
@@ -92,7 +92,7 @@ export default function Hero() {
                         <p className="text-xs text-[#A29E93] mt-1">International Institute of Information Technology</p>
                         <div className="flex gap-1.5 justify-center mt-3">
                             <span className="px-2 py-0.5 bg-[#0C0E0C] border border-[#2C302C] rounded text-gray-300 font-mono text-[9px] font-bold uppercase">HYDERABAD, IN</span>
-                            <span className="px-2 py-0.5 bg-[#D48C45]/10 border border-[#D48C45]/20 rounded text-[#D48C45] font-mono text-[9px] font-bold uppercase">CLASS OF 2026</span>
+                            <span className="px-2 py-0.5 bg-[#D48C45]/10 border border-[#D48C45]/20 rounded text-[#D48C45] font-mono text-[9px] font-bold uppercase">UG2K22 Batch</span>
                         </div>
                     </div>
                 </div>
