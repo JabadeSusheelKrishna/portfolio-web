@@ -65,7 +65,7 @@ export default function Hero() {
                                 className="w-full h-full object-cover filter brightness-95"
                             />
                         ) : (
-                            <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center text-[#EBE6DD] relative">
+                            <div className="w-full h-full flex flex-col items-center justify-center p-2 text-center text-[#EBE6DD] relative">
                                 {/* <User size={40} className="text-[#D48C45] mb-2 opacity-80" />
                                 <p className="font-mono text-[11px] text-[#A29E93]">Drop your profile picture here to preview!</p>
                                 <label className="mt-4 px-3 py-1.5 bg-[#D48C45] hover:bg-[#b07335] text-black font-sans text-xs font-bold rounded-lg transition-all cursor-pointer">
