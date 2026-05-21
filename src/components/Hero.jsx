@@ -78,7 +78,7 @@ export default function Hero() {
                                     />
                                 </label> */}
                                 <img
-                                    src="./src/assets/profile_compressed.png"
+                                    src="https://github.com/JabadeSusheelKrishna/portfolio-web/blob/main/src/assets/profile_compressed.png"
                                     alt="Susheel Krishna Jabade"
                                     className="w-full h-full object-cover filter brightness-95"
                                 />
